@@ -15,7 +15,7 @@ class GameRunner:
     def answer(self):
         total = 0
         for die in self.dice:
-            total += 1
+            total += die.value
         return total
 
     @classmethod
@@ -52,9 +52,17 @@ class GameRunner:
                 print("The fact it took you so long is pretty sad")
                 break
 
-            prompt = input("Would you like to play again?[Y/n]: ")
-
-            if prompt == 'y' or prompt == '':
-                continue
-            else:
-                i_just_throw_an_exception()
+            response = input("Would you like to play again? [y/n]: ")
+            done_playing = False
+            while True:
+                if response.lower() == 'y':
+                    done_playing = False
+                    break
+                elif response.lower() == 'n':
+                    done_playing = True
+                    break
+                else:
+                    response = input("Invalid input. Please enter 'y' or 'n': ")
+            if done_playing:
+                break
+        print("Thanks for playing!")
